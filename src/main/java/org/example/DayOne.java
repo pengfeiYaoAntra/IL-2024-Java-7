@@ -1,6 +1,5 @@
 package org.example;
 
-import com.sun.xml.internal.ws.wsdl.writer.document.http.Address;
 
 import java.util.ArrayList;
 
@@ -170,9 +169,9 @@ public class DayOne {
                 Integer int3 = 333;
                 Integer int4 = 333;
                 System.out.println(int3 == int4);// false
-                Integer int5 = new Integer(100);
-                System.out.println(int1 == int5); // false ->int1 and int5 are different object
-                System.out.println(int1.equals(int5));//true -> compare value of int1 and int 5
+               //Integer int5 = new Integer(100);
+//                System.out.println(int1 == int5); // false ->int1 and int5 are different object
+//                System.out.println(int1.equals(int5));//true -> compare value of int1 and int 5
 
 
             }
@@ -289,7 +288,7 @@ interface myInterfaceClass{
         private  String lastname;
         private String firstname;
 
-        private Address address;
+//        private Address address;
 
 
         // setter functions that return People class
@@ -309,7 +308,7 @@ interface myInterfaceClass{
                @Override
         protected Object clone() throws CloneNotSupportedException{
             People cloned = (People) super.clone();
-            cloned.address = new Address(this.address.city);
+//            cloned.address = new Address(this.address.city);
             return cloned;
         }
     }
