@@ -1,7 +1,11 @@
 package org.example;
 
 import javax.swing.*;
+import java.math.BigInteger;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -73,14 +77,66 @@ import java.util.stream.Collectors;
  *  optional:
  *  to avoid null pointer exception
  *
+ *completable future:
+ *  it is a way to perform asynchronous computation
+ *  what is asynchronous computation?
+ *  [a large data / file] -> if you are using main thread, it may takes a long time to process it
+ *  [q]                     ->33 % of file with thread 1
+ *  [large]                 -> 33% of file with thread 2 -> it takes a shouter time
+ *  [ file/data]            -> 34% of file with thread 3
+ *
+ *
+ *  completable future is super version of future(future task): like more functions you can use it with completable future
+ *
+ *
+ *
+ * what is supplier?
+ * supplier is a functional interface that has a single method called get().
+ * get() method takes NO parameter and return a value of a specified type
+ *
+ * what is consumer?
+ *
+ * consumer is a functional interface that has a single method called accept()
+ * accept() method takes a SINGLE parameter and  returns NO value.
+ *
+ * summary of run async and supply async
+ * return type: runAsync is for runnable tasks that do not return a result, whereas supplyAsync is for supplier tasks that do return a result
+ * Executor customization: method without the executor argument use common fork join pool, while method with executor argument allow
+ *                          for custom execution environments
+ *
+ *
+ *
+ * functions:
+ * whenComplete(BiConsumer(r,e)) -> r is the result that is returned from your supplyAsync and e is exception
+ * exceptionally() -> if you have any exceptions, exceptionally() will be executed
+ *
+ * get() vs join()
+ *  get() is the same with join(), but get() will throw an expcetion
+ *
+ *thenRun: to do task B when finish task A and task B does need the result from task A
+ * then accept: to do task B when finish task A, task B does need result from task A, but then accept does not return value
+ * then apply: to do task B when finish task A, task B does need result from task A with returning value
  *
  *
  *
  *
- *
+ * method reference:
+ * another version lambda expression -> shorter version
+ * using method reference to call a static:  className::staticMethod
+ *using method reference to call a method of a particular object
+ * using method reference to call constructor
  */
 public class DayThree {
     public static void main(String[] args) {
+        //method reference
+        String myString = "I donot love java";
+
+        Supplier<Integer> len = myString::length; // equals to  myString.length();
+        System.out.println(len.get());
+        //reference to call constructor
+        Function<String, BigInteger> bigIntegerFunction = BigInteger::new;
+
+
 //        Calculator add = (a,b) -> a +b;
 //        int res = add.calculate(1,2);
 //        System.out.println(res);
@@ -175,6 +231,16 @@ public class DayThree {
         }else {
             System.out.println("student 2 does not have phone number");
         }
+
+
+        // assuming you have three tasks to finish in you project
+        // task1 , task 2 and task 3
+        // each task takes 500 ms
+        // case 1 if you are using one thread
+        // the total time is 1500 ms
+
+        long startTime = System.currentTimeMillis();
+
 
      }
 
